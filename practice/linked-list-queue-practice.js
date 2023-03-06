@@ -32,36 +32,71 @@ class SinglyLinkedList {
     listLength() {
         // Returns the length of the list
         // Implement in O(n) and in O(1) time complexity
+        let curr = this.head;
+        let count = 0;
+
+        while (curr) {
+            count++;
+            curr = curr.next;
+        }
+
+        return count;
     }
 
     sumOfNodes() {
-        // Returns the sum of the values of all the nodes
+        // O(n) time complexity
+        let sum = 0;
+        let curr = this.head;
+        while (curr) {
+          sum += curr.value;
+          curr = curr.next;
+        }
+        return sum;
+      }
 
-        // Write your hypothesis on the time complexity of this method here
-    }
+      averageValue() {
+        // O(n) time complexity
+        
+        return this.sumOfNodes() / this.listLength();
+      }
 
-    averageValue() {
-        // Returns the average value of all the nodes
+      findNthNode(n) {
+        // O(n) time complexity
+        if (n < 0 || n >= this.length) {
+          return null;
+        }
+        let curr = this.head;
+        for (let i = 0; i < n; i++) {
+          curr = curr.next;
+        }
+        return curr;
+      }
 
-        // Write your hypothesis on the time complexity of this method here
-    }
-
-    findNthNode(n) {
-        // Returns the node at the nth index from the head
-
-        // Write your hypothesis on the time complexity of this method here
-    }
-
-    findMid() {
+      findMid() {
         // Returns the middle node
         // Implement this as a singly linked list then as a doubly linked list
-            // How do the implementation for singly and doubly vary if at all?
-
-        // Write your hypothesis on the time complexity of this method here
-    }
+        // Singly linked list implementation:
+        if (!this.head) {
+          return null;
+        }
+        let slow = this.head;
+        let fast = this.head;
+        while (fast && fast.next) {
+          slow = slow.next;
+          fast = fast.next.next;
+        }
+        return slow;
+      }
 
     reverse() {
         // Returns a new reversed version of the linked list
+        let reversedList = new SinglyLinkedList();
+        let curr = this.head;
+        while (curr) {
+            reversedList.addToTail(curr.value);
+            curr = curr.next;
+        }
+        return reversedList;
 
         // Write your hypothesis on the time complexity of this method here
     }
